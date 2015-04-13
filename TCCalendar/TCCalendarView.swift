@@ -17,6 +17,7 @@ let TCCalendarViewSectionBackgroundViewIdentifier = "TCCalendarViewSectionBackgr
 class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     var months = [NSDate]()
+    var weekdayOfFirstDay = [Int]()
     var calendar: NSCalendar!
 
     var startDate: NSDate! {
@@ -40,6 +41,9 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
 
             do {
                 months.append(dateForMonth)
+
+                let weekdayComponents = calendar.components(.CalendarUnitWeekday, fromDate: dateForMonth)
+                weekdayOfFirstDay.append(weekdayComponents.weekday - 1)
 
                 dateForMonth = calendar.dateByAddingComponents(monthComponents, toDate: dateForMonth, options: NSCalendarOptions.allZeros)!
             } while(dateForMonth.compare(endDate) != NSComparisonResult.OrderedDescending)
@@ -83,13 +87,16 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return months[section].daysOfMonth(inCalendar: calendar)
+        return months[section].daysOfMonth(inCalendar: calendar) + weekdayOfFirstDay[section]
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(TCCalendarViewDayCellIdentifier, forIndexPath: indexPath) as! TCCalendarViewDayCell
 
-        cell.dayLabel.text = "\(indexPath.item + 1)"
+        let weekday = weekdayOfFirstDay[indexPath.section]
+        if indexPath.item >= weekday {
+            cell.dayLabel.text = "\(indexPath.item + 1 - weekday)"
+        }
         return cell
     }
 

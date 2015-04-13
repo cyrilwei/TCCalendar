@@ -11,6 +11,11 @@ import UIKit
 class TCCalendarViewDayCell: UICollectionViewCell {
     var dayLabel: UILabel!
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        dayLabel.text = ""
+    }
 
     func initialize() {
         dayLabel = UILabel(frame: self.bounds)
