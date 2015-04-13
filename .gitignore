@@ -1,0 +1,6 @@
+.DS_Store
+.idea
+xcuserdata
+Pods
+*.lock
+project.xcworkspace
