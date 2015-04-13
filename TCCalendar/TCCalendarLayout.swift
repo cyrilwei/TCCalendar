@@ -9,13 +9,15 @@
 import UIKit
 
 class TCCalendarLayout: UICollectionViewFlowLayout {
+    var backgroundViewReferenceSize: CGSize!
 
     func initialize() {
-        self.sectionInset = UIEdgeInsetsZero
+        self.sectionInset = UIEdgeInsetsMake(0.0, 0.0, 10.0, 0.0)
         self.minimumInteritemSpacing = 0.0
         self.minimumLineSpacing = 0.0
         self.headerReferenceSize = CGSizeMake(0.0, 44.0)
         self.footerReferenceSize = CGSizeZero
+        self.backgroundViewReferenceSize = CGSizeMake(0.0, 130.0)
     }
 
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [AnyObject]? {
@@ -31,7 +33,10 @@ class TCCalendarLayout: UICollectionViewFlowLayout {
         for attribute in sections {
             let bgAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: TCCalendarViewSectionBackgroundKind, withIndexPath: (attribute as! UICollectionViewLayoutAttributes).indexPath)
 
-            bgAttribute.frame = CGRectMake(0.0, attribute.frame.origin.y + attribute.frame.height, self.collectionView!.frame.width, 100.0)
+            let bgWidth = self.backgroundViewReferenceSize.width == 0 ? self.collectionView!.frame.width : self.backgroundViewReferenceSize.width
+            let bgHeight = self.backgroundViewReferenceSize.height
+            
+            bgAttribute.frame = CGRectMake(0.0, attribute.frame.origin.y + attribute.frame.height, bgWidth, bgHeight)
             bgAttribute.zIndex = attribute.zIndex - 1
 
             attributes.append(bgAttribute)

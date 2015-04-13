@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F145C3171ADB745D00B64F26 /* NSDate+month.swift in Sources */ = {isa = PBXBuildFile; fileRef = F145C3161ADB745D00B64F26 /* NSDate+month.swift */; };
 		F19FDDF81AD9D0E30002B778 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19FDDF71AD9D0E30002B778 /* AppDelegate.swift */; };
 		F19FDDFA1AD9D0E30002B778 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19FDDF91AD9D0E30002B778 /* ViewController.swift */; };
 		F19FDDFD1AD9D0E30002B778 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F19FDDFB1AD9D0E30002B778 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F145C3161ADB745D00B64F26 /* NSDate+month.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+month.swift"; sourceTree = "<group>"; };
 		F19FDDF21AD9D0E30002B778 /* TCCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F19FDDF61AD9D0E30002B778 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F19FDDF71AD9D0E30002B778 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				F19FDE1C1AD9DBC70002B778 /* TCCalendarViewDayCell.swift */,
 				F19FDE201AD9FB920002B778 /* TCCalendarMonthTitleView.swift */,
 				F19FDE221ADA098F0002B778 /* TCCalendarViewSectionBackgroundView.swift */,
+				F145C3161ADB745D00B64F26 /* NSDate+month.swift */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				F19FDE211AD9FB920002B778 /* TCCalendarMonthTitleView.swift in Sources */,
 				F19FDE251ADA121D0002B778 /* TCCalendarLayout.swift in Sources */,
 				F19FDDF81AD9D0E30002B778 /* AppDelegate.swift in Sources */,
+				F145C3171ADB745D00B64F26 /* NSDate+month.swift in Sources */,
 				F19FDE1D1AD9DBC70002B778 /* TCCalendarViewDayCell.swift in Sources */,
 				F19FDE231ADA098F0002B778 /* TCCalendarViewSectionBackgroundView.swift in Sources */,
 			);
@@ -437,6 +441,7 @@
 				F19FDE131AD9D0E30002B778 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F19FDE141AD9D0E30002B778 /* Build configuration list for PBXNativeTarget "TCCalendarTests" */ = {
 			isa = XCConfigurationList;
@@ -445,6 +450,7 @@
 				F19FDE161AD9D0E30002B778 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

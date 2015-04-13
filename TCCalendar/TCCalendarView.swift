@@ -16,7 +16,8 @@ let TCCalendarViewSectionBackgroundViewIdentifier = "TCCalendarViewSectionBackgr
 
 class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    var months: NSSet!
+    var months = [NSDate]()
+    var calendar: NSCalendar!
 
     var startDate: NSDate! {
         didSet {
@@ -32,7 +33,16 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
 
     private func updateData() {
         if startDate != nil && endDate != nil {
+            var dateForMonth = startDate.firstDateOfMonth(inCalendar: calendar)
 
+            let monthComponents = NSDateComponents()
+            monthComponents.month = 1
+
+            do {
+                months.append(dateForMonth)
+
+                dateForMonth = calendar.dateByAddingComponents(monthComponents, toDate: dateForMonth, options: NSCalendarOptions.allZeros)!
+            } while(dateForMonth.compare(endDate) != NSComparisonResult.OrderedDescending)
         }
 
         self.reloadData()
@@ -44,11 +54,16 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
         self.registerClass(TCCalendarMonthTitleView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TCCalendarMonthTitleViewIdentifier)
         self.registerClass(TCCalendarViewSectionBackgroundView.self, forSupplementaryViewOfKind: TCCalendarViewSectionBackgroundKind, withReuseIdentifier: TCCalendarViewSectionBackgroundViewIdentifier)
 
+        self.calendar = NSCalendar.currentCalendar()
+
         self.dataSource = self
         self.delegate = self
 
         self.collectionViewLayout = TCCalendarLayout()
         self.backgroundColor = UIColor.clearColor()
+
+        self.startDate = NSDate()
+        self.endDate = NSDate().dateByAddingTimeInterval(60*60*24*365)
     }
 
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -64,11 +79,11 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
     }
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 3
+        return months.count
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 31
+        return months[section].daysOfMonth(inCalendar: calendar)
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -82,13 +97,13 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
         if kind == UICollectionElementKindSectionHeader {
             let titleView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: TCCalendarMonthTitleViewIdentifier, forIndexPath: indexPath) as! TCCalendarMonthTitleView
             titleView.backgroundColor = UIColor.clearColor()
-            titleView.titleLabel.text = "\(indexPath.section + 1)"
+            titleView.titleLabel.text = months[indexPath.section].longMonthString
 
             return titleView
         } else {
             let bgView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: TCCalendarViewSectionBackgroundViewIdentifier, forIndexPath: indexPath) as! TCCalendarViewSectionBackgroundView
 
-            bgView.monthLabel.text = "\(indexPath.section + 1)"
+            bgView.monthLabel.text = months[indexPath.section].shortMonthString
             bgView.monthLabel.sizeToFit()
 
             return bgView
