@@ -10,11 +10,14 @@ import UIKit
 
 class TCCalendarViewDayCell: UICollectionViewCell {
     var dayLabel: UILabel!
+    var date: NSDate!
 
     override func prepareForReuse() {
         super.prepareForReuse()
 
         dayLabel.text = ""
+        dayLabel.textColor = UIColor.blackColor()
+        dayLabel.font = UIFont.systemFontOfSize(18)
     }
 
     func initialize() {
@@ -26,9 +29,6 @@ class TCCalendarViewDayCell: UICollectionViewCell {
         let views = ["dayLabel": dayLabel]
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[dayLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[dayLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
-
-        self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.blackColor().CGColor
     }
 
     override init(frame: CGRect) {

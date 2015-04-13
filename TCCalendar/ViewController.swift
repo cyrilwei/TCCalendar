@@ -12,4 +12,15 @@ class ViewController: UIViewController {
 
     @IBOutlet var calendarView: TCCalendarView!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        calendarView.shouldEnableDateClosure = { date, calendar in
+            return date.compareWithoutTime(NSDate(), inCalendar: calendar) != NSComparisonResult.OrderedAscending
+        }
+//
+//        calendarView.shouldSelectDateClosure = { date, calendar in
+//            return date.compareWithoutTime(NSDate(), inCalendar: calendar) != NSComparisonResult.OrderedSame
+//        }
+    }
 }

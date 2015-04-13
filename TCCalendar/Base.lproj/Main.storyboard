@@ -31,7 +31,7 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="calendarView" destination="TWF-tb-2qX" id="wrC-BW-0Mg"/>
+                        <outlet property="calendarView" destination="TWF-tb-2qX" id="WER-Vq-ef4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

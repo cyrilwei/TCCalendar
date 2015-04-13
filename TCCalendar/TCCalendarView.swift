@@ -16,9 +16,14 @@ let TCCalendarViewSectionBackgroundViewIdentifier = "TCCalendarViewSectionBackgr
 
 class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    var weekdaySymbols: [String]!
+
     var months = [NSDate]()
     var weekdayOfFirstDay = [Int]()
     var calendar: NSCalendar!
+
+    var shouldEnableDateClosure: ((date: NSDate, calendar: NSCalendar) -> (Bool))?
+    var shouldSelectDateClosure: ((date: NSDate, calendar: NSCalendar) -> (Bool))?
 
     var startDate: NSDate! {
         didSet {
@@ -60,6 +65,10 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
 
         self.calendar = NSCalendar.currentCalendar()
 
+        let formatter = NSDateFormatter()
+        formatter.calendar = self.calendar
+        self.weekdaySymbols = formatter.veryShortWeekdaySymbols as! [String]
+
         self.dataSource = self
         self.delegate = self
 
@@ -87,17 +96,60 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return months[section].daysOfMonth(inCalendar: calendar) + weekdayOfFirstDay[section]
+        return months[section].daysOfMonth(inCalendar: calendar) + weekdayOfFirstDay[section] + 7
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(TCCalendarViewDayCellIdentifier, forIndexPath: indexPath) as! TCCalendarViewDayCell
 
         let weekday = weekdayOfFirstDay[indexPath.section]
-        if indexPath.item >= weekday {
-            cell.dayLabel.text = "\(indexPath.item + 1 - weekday)"
+        if indexPath.item < 7 {
+            cell.dayLabel.text = weekdaySymbols[indexPath.item]
+            cell.dayLabel.font = UIFont.boldSystemFontOfSize(18)
+        } else if indexPath.item >= weekday + 7 {
+            let day = indexPath.item - weekday - 7 + 1
+
+            let month = months[indexPath.section]
+            let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth, fromDate: month)
+            components.day = day
+
+            let realDate = calendar.dateFromComponents(components)!
+
+            cell.dayLabel.text = "\(day)"
+            cell.date = realDate
+
+            if realDate.compareWithoutTime(NSDate(), inCalendar: calendar) == .OrderedSame {
+                cell.dayLabel.font = UIFont.boldSystemFontOfSize(18)
+            }
+
+            if let shouldEnableDate = shouldEnableDateClosure {
+                cell.dayLabel.textColor = shouldEnableDate(date: realDate, calendar: calendar) ? UIColor.blackColor() : UIColor.grayColor()
+            }
         }
+        
         return cell
+    }
+
+    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        let weekday = weekdayOfFirstDay[indexPath.section]
+        if indexPath.item < weekday + 7 {
+            return false
+        } else {
+            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! TCCalendarViewDayCell
+            if let shouldEnableDate = shouldEnableDateClosure where !shouldEnableDate(date: cell.date, calendar: calendar) {
+                return false
+            } else if let shouldSelectDate = shouldSelectDateClosure where !shouldSelectDate(date: cell.date, calendar: calendar) {
+                return false
+            } else {
+                return true
+            }
+        }
+    }
+
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! TCCalendarViewDayCell
+
+        println(" select: \(cell.date)")
     }
 
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -105,6 +157,7 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
             let titleView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: TCCalendarMonthTitleViewIdentifier, forIndexPath: indexPath) as! TCCalendarMonthTitleView
             titleView.backgroundColor = UIColor.clearColor()
             titleView.titleLabel.text = months[indexPath.section].longMonthString
+            titleView.drawSeparatorLine = indexPath.section != 0
 
             return titleView
         } else {

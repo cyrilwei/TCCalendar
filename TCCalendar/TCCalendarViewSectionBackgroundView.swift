@@ -10,24 +10,34 @@ import UIKit
 
 class TCCalendarViewSectionBackgroundView: UICollectionReusableView {
     var monthLabel: UILabel!
-
+    var contentOffset: UIOffset! {
+        didSet {
+            setNeedsUpdateConstraints()
+        }
+    }
 
     func initialize() {
+        self.backgroundColor = UIColor.clearColor()
+
         monthLabel = UILabel(frame: self.bounds)
         monthLabel.textAlignment = .Left
         monthLabel.font = UIFont.boldSystemFontOfSize(108)
         monthLabel.alpha = 0.1
         monthLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-
-        monthLabel.layer.borderWidth = 1.0
-        monthLabel.layer.borderColor = UIColor.orangeColor().CGColor
         self.addSubview(monthLabel)
 
-        let views = ["monthLabel": monthLabel]
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[monthLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[monthLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
+        contentOffset = UIOffsetMake(10, -14)
+    }
 
-        self.backgroundColor = UIColor.clearColor()
+    override func updateConstraints() {
+        super.updateConstraints()
+
+        let offsetHorizontal = contentOffset.horizontal ?? 0
+        let offsetVertical = contentOffset.vertical ?? 0
+
+        let views = ["monthLabel": monthLabel]
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(\(offsetHorizontal))-[monthLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(\(offsetVertical))-[monthLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
     }
 
     override init(frame: CGRect) {

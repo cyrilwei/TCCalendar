@@ -43,4 +43,14 @@ extension NSDate {
         formatter.dateFormat = "MMM"
         return formatter.stringFromDate(self)
     }
+
+    func compareWithoutTime(anotherDate: NSDate, inCalendar calendar: NSCalendar) -> NSComparisonResult {
+        let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: self)
+        let anotherComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: anotherDate)
+
+        let dateOnly = calendar.dateFromComponents(components)!
+        let anotherDateOnly = calendar.dateFromComponents(anotherComponents)!
+
+        return dateOnly.compare(anotherDateOnly)
+    }
 }
