@@ -27,7 +27,11 @@ import UIKit
 
 class TCCalendarMonthTitleView: UICollectionReusableView {
     var titleLabel: UILabel!
-    var drawSeparatorLine: Bool = true
+    var drawSeparatorLine: Bool = true {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
 
     override func prepareForReuse() {
         super.prepareForReuse()
