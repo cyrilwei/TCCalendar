@@ -41,6 +41,9 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
 
     var shouldEnableDateClosure: ((date: NSDate, calendar: NSCalendar) -> (Bool))?
     var shouldSelectDateClosure: ((date: NSDate, calendar: NSCalendar) -> (Bool))?
+    var didSelectDateClosure: ((date: NSDate, calendar: NSCalendar) -> ())?
+    
+    var cellDecorateClosure: ((indexPath: NSIndexPath, cell: TCCalendarViewDayCell) -> ())?
 
     var startDate: NSDate! {
         didSet {
@@ -143,7 +146,9 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
                 cell.dayLabel.textColor = shouldEnableDate(date: realDate, calendar: calendar) ? UIColor.blackColor() : UIColor.grayColor()
             }
         }
-        
+
+        cellDecorateClosure?(indexPath: indexPath, cell: cell)
+
         return cell
     }
 
@@ -166,7 +171,7 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! TCCalendarViewDayCell
 
-        println(" select: \(cell.date)")
+        didSelectDateClosure?(date: cell.date, calendar: calendar)
     }
 
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -182,6 +187,7 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
 
             bgView.monthLabel.text = months[indexPath.section].shortMonthString
             bgView.monthLabel.sizeToFit()
+            bgView.setNeedsUpdateConstraints()
 
             return bgView
         }

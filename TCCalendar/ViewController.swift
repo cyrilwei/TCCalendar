@@ -28,9 +28,44 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var calendarView: TCCalendarView!
+    
+    var startDate: NSDate?
+    var endDate: NSDate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        calendarView.cellDecorateClosure = { indexPath, cell in
+            if cell.date == nil {
+                return
+            }
+            
+            var color: UIColor = UIColor.clearColor()
+            
+            if let startDate = self.startDate {
+                if cell.date == startDate {
+                    color = UIColor.orangeColor()
+                }
+
+                if let endDate = self.endDate {
+                    if cell.date == endDate {
+                        if startDate == endDate {
+                            color = UIColor.purpleColor()
+                        } else {
+                            color = UIColor.blueColor()
+                        }
+                    } else if cell.date.compare(startDate) == .OrderedDescending && cell.date.compare(endDate) == .OrderedAscending {
+                        color = UIColor.grayColor()
+                    }
+                }
+            }
+            
+            let view = UIView(frame: cell.bounds)
+            view.backgroundColor = color
+            cell.backgroundView = view
+            
+            cell.dayLabel.textColor = UIColor.darkGrayColor()
+        }
 
         calendarView.shouldEnableDateClosure = { date, calendar in
             return date.compareWithoutTime(NSDate(), inCalendar: calendar) != NSComparisonResult.OrderedAscending
@@ -39,5 +74,19 @@ class ViewController: UIViewController {
 //        calendarView.shouldSelectDateClosure = { date, calendar in
 //            return date.compareWithoutTime(NSDate(), inCalendar: calendar) != NSComparisonResult.OrderedSame
 //        }
+        
+        calendarView.didSelectDateClosure = { date, calendar in
+            if self.startDate == nil {
+                self.startDate = date
+            } else if self.endDate == nil {
+                self.endDate = date
+            } else {
+                self.startDate = date
+                self.endDate = nil
+            }
+            
+            self.calendarView.reloadData()
+        }
+        
     }
 }

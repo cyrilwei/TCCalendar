@@ -32,20 +32,32 @@ class TCCalendarViewDayCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
+        clear()
+    }
+    
+    private func clear() {
+        date = nil
+        backgroundView = nil
+        
         dayLabel.text = ""
         dayLabel.textColor = UIColor.blackColor()
         dayLabel.font = UIFont.systemFontOfSize(18)
     }
-
-    func initialize() {
+    
+    private func addDayLabel() {
         dayLabel = UILabel(frame: self.bounds)
         dayLabel.textAlignment = .Center
         dayLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.contentView.addSubview(dayLabel)
-
+        
         let views = ["dayLabel": dayLabel]
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[dayLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[dayLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
+    }
+
+    func initialize() {
+        addDayLabel()
+        clear()
     }
 
     override init(frame: CGRect) {
