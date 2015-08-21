@@ -32,10 +32,10 @@ class TCCalendarViewDayCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        clear()
+        reset()
     }
     
-    private func clear() {
+    private func reset() {
         date = nil
         backgroundView = nil
         
@@ -57,7 +57,7 @@ class TCCalendarViewDayCell: UICollectionViewCell {
 
     func initialize() {
         addDayLabel()
-        clear()
+        reset()
     }
 
     override init(frame: CGRect) {

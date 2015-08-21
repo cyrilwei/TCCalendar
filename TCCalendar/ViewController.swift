@@ -35,8 +35,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        calendarView.cellDecorateClosure = { indexPath, cell in
-            if cell.date == nil {
+        calendarView.cellDecorateClosure = { cell, isEnabled in
+            if !isEnabled {
+                cell.dayLabel.textColor = UIColor.lightGrayColor()
                 return
             }
             
@@ -64,7 +65,7 @@ class ViewController: UIViewController {
             view.backgroundColor = color
             cell.backgroundView = view
             
-            cell.dayLabel.textColor = UIColor.darkGrayColor()
+            cell.dayLabel.textColor = UIColor.blackColor()
         }
 
         calendarView.shouldEnableDateClosure = { date, calendar in
