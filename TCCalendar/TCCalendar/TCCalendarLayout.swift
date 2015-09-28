@@ -37,10 +37,10 @@ class TCCalendarLayout: UICollectionViewFlowLayout {
         self.backgroundViewReferenceSize = CGSizeMake(0.0, 130.0)
     }
 
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [AnyObject]? {
-        var attributes = super.layoutAttributesForElementsInRect(rect) as! [UICollectionViewLayoutAttributes]
+    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        var attributes = super.layoutAttributesForElementsInRect(rect)!
 
-        var sections = NSMutableSet()
+        let sections = NSMutableSet()
         for attribute in attributes {
             if attribute.representedElementCategory == .SupplementaryView && attribute.representedElementKind == UICollectionElementKindSectionHeader {
                 sections.addObject(attribute)
@@ -68,7 +68,7 @@ class TCCalendarLayout: UICollectionViewFlowLayout {
         initialize()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
         initialize()

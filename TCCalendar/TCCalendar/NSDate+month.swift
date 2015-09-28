@@ -27,7 +27,7 @@ import UIKit
 
 extension NSDate {
     func firstDateOfMonth(inCalendar calendar: NSCalendar) -> NSDate {
-        let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: self)
+        let components = calendar.components([.Year, .Month, .Day], fromDate: self)
 
         components.day = 1
 
@@ -35,7 +35,7 @@ extension NSDate {
     }
 
     func lastDateOfMonth(inCalendar calendar: NSCalendar) -> NSDate {
-        let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: self)
+        let components = calendar.components([.Year, .Month, .Day], fromDate: self)
 
         components.day = 0
         components.month += 1
@@ -44,7 +44,7 @@ extension NSDate {
     }
 
     func daysOfMonth(inCalendar calendar: NSCalendar) -> Int {
-        let components = calendar.components(.CalendarUnitDay, fromDate: self.firstDateOfMonth(inCalendar: calendar), toDate: self.lastDateOfMonth(inCalendar: calendar), options: .allZeros)
+        let components = calendar.components(.Day, fromDate: self.firstDateOfMonth(inCalendar: calendar), toDate: self.lastDateOfMonth(inCalendar: calendar), options: [])
 
         return components.day + 1
     }
@@ -62,8 +62,8 @@ extension NSDate {
     }
 
     func compareWithoutTime(anotherDate: NSDate, inCalendar calendar: NSCalendar) -> NSComparisonResult {
-        let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: self)
-        let anotherComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: anotherDate)
+        let components = calendar.components([.Year, .Month, .Day], fromDate: self)
+        let anotherComponents = calendar.components([.Year, .Month, .Day], fromDate: anotherDate)
 
         let dateOnly = calendar.dateFromComponents(components)!
         let anotherDateOnly = calendar.dateFromComponents(anotherComponents)!

@@ -66,13 +66,13 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
             let monthComponents = NSDateComponents()
             monthComponents.month = 1
 
-            do {
+            repeat {
                 months.append(dateForMonth)
 
-                let weekdayComponents = calendar.components(.CalendarUnitWeekday, fromDate: dateForMonth)
+                let weekdayComponents = calendar.components(.Weekday, fromDate: dateForMonth)
                 weekdayOfFirstDay.append(weekdayComponents.weekday - 1)
 
-                dateForMonth = calendar.dateByAddingComponents(monthComponents, toDate: dateForMonth, options: NSCalendarOptions.allZeros)!
+                dateForMonth = calendar.dateByAddingComponents(monthComponents, toDate: dateForMonth, options: NSCalendarOptions())!
             } while(dateForMonth.compare(endDate) != NSComparisonResult.OrderedDescending)
         }
 
@@ -90,7 +90,7 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
 
         let formatter = NSDateFormatter()
         formatter.calendar = self.calendar
-        self.weekdaySymbols = formatter.veryShortWeekdaySymbols as! [String]
+        self.weekdaySymbols = formatter.veryShortWeekdaySymbols as [String]
         self.numberOfDaysInWeek = self.weekdaySymbols.count
 
         self.dataSource = self
@@ -109,7 +109,7 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
         initialize()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
         initialize()
@@ -137,7 +137,7 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
                 let day = indexPath.item - weekday - numberOfDaysInWeek + 1
 
                 let month = months[indexPath.section]
-                let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth, fromDate: month)
+                let components = calendar.components([.Year, .Month], fromDate: month)
                 components.day = day
 
                 let realDate = calendar.dateFromComponents(components)!

@@ -41,12 +41,12 @@ class TCCalendarMonthTitleView: UICollectionReusableView {
     
     func initialize() {
         titleLabel = UILabel(frame: self.bounds)
-        titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(titleLabel)
 
         let views = ["titleLabel": titleLabel]
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[titleLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[titleLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[titleLabel]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[titleLabel]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
     }
 
     override init(frame: CGRect) {
@@ -55,7 +55,7 @@ class TCCalendarMonthTitleView: UICollectionReusableView {
         initialize()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         initialize()

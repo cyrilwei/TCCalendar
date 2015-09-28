@@ -40,7 +40,7 @@ class TCCalendarViewSectionBackgroundView: UICollectionReusableView {
         monthLabel.textAlignment = .Left
         monthLabel.font = UIFont.boldSystemFontOfSize(108)
         monthLabel.alpha = 0.1
-        monthLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        monthLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(monthLabel)
 
         contentOffset = UIOffsetMake(10, -14)
@@ -53,8 +53,8 @@ class TCCalendarViewSectionBackgroundView: UICollectionReusableView {
         let offsetVertical = contentOffset.vertical ?? 0
 
         let views = ["monthLabel": monthLabel]
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(\(offsetHorizontal))-[monthLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(\(offsetVertical))-[monthLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(\(offsetHorizontal))-[monthLabel]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(\(offsetVertical))-[monthLabel]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
     }
 
     override init(frame: CGRect) {
@@ -63,7 +63,7 @@ class TCCalendarViewSectionBackgroundView: UICollectionReusableView {
         initialize()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         initialize()

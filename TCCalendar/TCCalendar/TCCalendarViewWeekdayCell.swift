@@ -45,12 +45,12 @@ class TCCalendarViewWeekdayCell: UICollectionViewCell {
     private func addDayLabel() {
         weekdayLabel = UILabel(frame: self.bounds)
         weekdayLabel.textAlignment = .Center
-        weekdayLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        weekdayLabel.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(weekdayLabel)
         
         let views = ["dayLabel": weekdayLabel]
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[dayLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[dayLabel]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[dayLabel]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[dayLabel]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
     }
     
     func initialize() {
@@ -64,7 +64,7 @@ class TCCalendarViewWeekdayCell: UICollectionViewCell {
         initialize()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         initialize()
