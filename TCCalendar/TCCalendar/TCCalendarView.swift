@@ -27,7 +27,7 @@ import UIKit
 
 let TCCalendarViewDayCellIdentifier = "TCCalendarViewDayCellIdentifier"
 let TCCalendarViewWeekdayCellIdentifier = "TCCalendarViewWeekdayCellIdentifier"
-let TCCalendarMonthTitleKind = "TCCalendarMonthTitle"
+let TCCalendarMonthTitleKind = "TCCalendarMonthTitleKind"
 let TCCalendarMonthTitleViewIdentifier = "TCCalendarMonthTitleViewIdentifier"
 let TCCalendarViewSectionBackgroundKind = "TCCalendarViewSectionBackgroundKind"
 let TCCalendarViewSectionBackgroundViewIdentifier = "TCCalendarViewSectionBackgroundViewIdentifier"
