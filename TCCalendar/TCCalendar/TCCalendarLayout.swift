@@ -54,7 +54,7 @@ class TCCalendarLayout: UICollectionViewFlowLayout {
             let bgHeight = self.backgroundViewReferenceSize.height
             
             bgAttribute.frame = CGRectMake(0.0, attribute.frame.origin.y + attribute.frame.height, bgWidth, bgHeight)
-            bgAttribute.zIndex = attribute.zIndex - 1
+            bgAttribute.zIndex = -10
 
             attributes.append(bgAttribute)
         }
