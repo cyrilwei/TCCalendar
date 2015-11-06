@@ -77,17 +77,22 @@ class ViewController: UIViewController {
 //        }
         
         calendarView.didSelectDateClosure = { date, calendar in
-            if self.startDate == nil {
-                self.startDate = date
-            } else if self.endDate == nil {
-                self.endDate = date
+            if let startDate = self.startDate {
+                if self.endDate == nil {
+                    if date.compareWithoutTime(startDate, inCalendar: calendar) == NSComparisonResult.OrderedAscending {
+                        self.startDate = date
+                    } else {
+                        self.endDate = date
+                    }
+                } else {
+                    self.startDate = date
+                    self.endDate = nil
+                }
             } else {
                 self.startDate = date
-                self.endDate = nil
             }
             
             self.calendarView.reloadData()
         }
-        
     }
 }
