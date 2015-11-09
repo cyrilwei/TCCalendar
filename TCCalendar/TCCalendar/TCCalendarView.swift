@@ -150,11 +150,18 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
                     cell.dayLabel.font = UIFont.boldSystemFontOfSize(18)
                 }
                 
-                cellDecorateClosure?(cell: cell, isEnabled: self.shouldEnableDateClosure?(date: realDate, calendar: calendar) ?? true)
+                cellDecorateClosure?(cell: cell, isEnabled: shouldEnableDate(realDate))
             }
             
             return cell
         }
+    }
+
+    private func shouldEnableDate(date: NSDate) -> Bool {
+        guard date.compareWithoutTime(self.startDate, inCalendar: calendar) != .OrderedAscending else { return false }
+        guard date.compareWithoutTime(self.endDate, inCalendar: calendar) != .OrderedDescending else { return false }
+
+        return self.shouldEnableDateClosure?(date: date, calendar: calendar) ?? true
     }
 
     func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -166,7 +173,7 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! TCCalendarViewDayCell
         var result = true
         
-        result = result && (shouldEnableDateClosure?(date: cell.date, calendar: calendar) ?? true)
+        result = result && shouldEnableDate(cell.date)
         result = result && (shouldSelectDateClosure?(date: cell.date, calendar: calendar) ?? true)
         
         return result
