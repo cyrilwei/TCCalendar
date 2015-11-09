@@ -34,6 +34,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        calendarView.endDate = NSDate(timeIntervalSinceNow: 60 * 60 * 24 * 180)
         
         calendarView.cellDecorateClosure = { cell, isEnabled in
             if !isEnabled {

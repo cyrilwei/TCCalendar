@@ -66,6 +66,7 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
             let monthComponents = NSDateComponents()
             monthComponents.month = 1
 
+            months.removeAll(keepCapacity: true)
             repeat {
                 months.append(dateForMonth)
 
