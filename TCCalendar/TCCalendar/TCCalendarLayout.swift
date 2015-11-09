@@ -29,7 +29,6 @@ class TCCalendarLayout: UICollectionViewFlowLayout {
     var backgroundViewReferenceSize: CGSize!
 
     func initialize() {
-        self.sectionInset = UIEdgeInsetsMake(0.0, 0.0, 10.0, 0.0)
         self.minimumInteritemSpacing = 0.0
         self.minimumLineSpacing = 0.0
         self.headerReferenceSize = CGSizeMake(0.0, 44.0)
@@ -39,18 +38,21 @@ class TCCalendarLayout: UICollectionViewFlowLayout {
 
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var attributes = super.layoutAttributesForElementsInRect(rect)!
+        let calendarView = self.collectionView as! TCCalendarView
 
-        let sections = NSMutableSet()
+        var sections = Set<UICollectionViewLayoutAttributes>()
         for attribute in attributes {
             if attribute.representedElementCategory == .SupplementaryView && attribute.representedElementKind == UICollectionElementKindSectionHeader {
-                sections.addObject(attribute)
+                guard calendarView.sections[attribute.indexPath.section].hasDecorationView else { continue }
+
+                sections.insert(attribute)
             }
         }
 
         for attribute in sections {
-            let indexPath = (attribute as! UICollectionViewLayoutAttributes).indexPath
+            let indexPath = attribute.indexPath
 
-            guard (self.collectionView as! TCCalendarView).sections[indexPath.section].hasDecorationView else { continue }
+            guard calendarView.sections[indexPath.section].hasDecorationView else { continue }
 
             let bgAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: TCCalendarViewSectionBackgroundKind, withIndexPath: indexPath)
 
