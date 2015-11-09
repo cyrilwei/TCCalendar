@@ -34,6 +34,14 @@ class TCCalendarMonthTitleView: UICollectionReusableView {
         }
     }
 
+    dynamic func titleFont() -> UIFont {
+        return self.titleLabel?.font ?? UIFont.systemFontOfSize(UIFont.systemFontSize())
+    }
+
+    dynamic func setTitleFont(font: UIFont) {
+        self.titleLabel?.font = font
+    }
+
     override func prepareForReuse() {
         super.prepareForReuse()
 
@@ -70,16 +78,16 @@ class TCCalendarMonthTitleView: UICollectionReusableView {
     }
 
     override func drawRect(rect: CGRect) {
-        if drawSeparatorLine {
-            let context = UIGraphicsGetCurrentContext()
+        guard drawSeparatorLine else { return }
 
-            CGContextSetAllowsAntialiasing(context, false)
-            CGContextSetStrokeColorWithColor(context, UIColor.blackColor().CGColor)
-            CGContextSetLineWidth(context, 1.0)
-            CGContextMoveToPoint(context, 0.0, 0.0)
-            CGContextAddLineToPoint(context, self.bounds.width, 0.0)
-            CGContextStrokePath(context)
-            CGContextSetAllowsAntialiasing(context, true)
-        }
+        let context = UIGraphicsGetCurrentContext()
+
+        CGContextSetAllowsAntialiasing(context, false)
+        CGContextSetStrokeColorWithColor(context, UIColor.blackColor().CGColor)
+        CGContextSetLineWidth(context, 1.0)
+        CGContextMoveToPoint(context, 0.0, 0.0)
+        CGContextAddLineToPoint(context, self.bounds.width, 0.0)
+        CGContextStrokePath(context)
+        CGContextSetAllowsAntialiasing(context, true)
     }
 }
