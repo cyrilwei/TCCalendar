@@ -1,5 +1,5 @@
 //
-//  TCCalendarMonthSection.swift
+//  TCCalendarSupplementarySectionView.swift
 //  TCCalendar
 //
 //  Copyright (c) 2015 Cyril Wei
@@ -25,28 +25,21 @@
 
 import UIKit
 
-class TCCalendarMonthSection: TCCalendarSection {
-    var month: NSDate
-    var calendar: NSCalendar
-    var numberOfDaysInWeek: Int = 7
+class TCCalendarSupplementarySectionView: UICollectionReusableView {
+    override func prepareForReuse() {
+        super.prepareForReuse()
 
-    var weekdayOfFirstDay: Int
-    var drawSeparatorLine: Bool = true
-
-    var numberOfItems: Int {
-        return month.daysOfMonth(inCalendar: calendar) + weekdayOfFirstDay + numberOfDaysInWeek
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
     }
 
-    var hasDecorationView: Bool {
-        return true
-    }
+    func showSupplementaryView(view: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(view)
 
-    init(month: NSDate, calendar: NSCalendar, numberOfDaysInWeek: Int) {
-        self.month = month
-        self.calendar = calendar
-        self.numberOfDaysInWeek = numberOfDaysInWeek
-
-        let weekdayComponents = calendar.components(.Weekday, fromDate: month)
-        self.weekdayOfFirstDay = weekdayComponents.weekday - 1
+        let views = ["supplementaryView": view]
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(15)-[supplementaryView]-(15)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(15)-[supplementaryView]-(15)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
     }
 }

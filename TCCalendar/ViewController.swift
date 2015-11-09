@@ -36,7 +36,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         calendarView.endDate = NSDate(timeIntervalSinceNow: 60 * 60 * 24 * 180)
-        
+
+        let headerLabel = UILabel(frame: CGRectMake(0.0, 0.0, 0.0, 100.0))
+        headerLabel.font = UIFont.italicSystemFontOfSize(UIFont.systemFontSize())
+        headerLabel.text = "Calendar Header"
+        calendarView.headerView = headerLabel
+
+        let footerLabel = UILabel(frame: CGRectMake(0.0, 0.0, 0.0, 50.0))
+        footerLabel.font = UIFont.italicSystemFontOfSize(UIFont.systemFontSize())
+        footerLabel.text = "Calendar Footer"
+        calendarView.footerView = footerLabel
+
         calendarView.cellDecorateClosure = { cell, isEnabled in
             if !isEnabled {
                 cell.dayLabel.textColor = UIColor.lightGrayColor()

@@ -1,5 +1,5 @@
 //
-//  TCCalendarTextSection.swift
+//  TCCalendarSupplementarySection.swift
 //  TCCalendar
 //
 //  Copyright (c) 2015 Cyril Wei
@@ -23,8 +23,16 @@
 //  SOFTWARE.
 //
 
-import Foundation
+import UIKit
 
-class TCCalendarTextSection: TCCalendarSection {
-    
+class TCCalendarSupplementarySection: TCCalendarSection {
+    var view: UIView
+
+    init(view: UIView) {
+        self.view = view
+    }
+
+    var headerHeight: CGFloat {
+        return self.view.bounds.height
+    }
 }

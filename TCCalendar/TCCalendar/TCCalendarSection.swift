@@ -23,14 +23,24 @@
 //  SOFTWARE.
 //
 
-import Foundation
+import UIKit
 
 protocol TCCalendarSection {
     var numberOfItems: Int { get }
+    var hasDecorationView: Bool { get }
+    var headerHeight: CGFloat { get }
 }
 
 extension TCCalendarSection {
     var numberOfItems: Int {
         return 0
+    }
+
+    var hasDecorationView: Bool {
+        return false
+    }
+
+    var headerHeight: CGFloat {
+        return 44.0
     }
 }

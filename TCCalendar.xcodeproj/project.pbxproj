@@ -19,9 +19,10 @@
 		F19FDDFD1AD9D0E30002B778 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F19FDDFB1AD9D0E30002B778 /* Main.storyboard */; };
 		F19FDDFF1AD9D0E30002B778 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F19FDDFE1AD9D0E30002B778 /* Images.xcassets */; };
 		F19FDE021AD9D0E30002B778 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F19FDE001AD9D0E30002B778 /* LaunchScreen.xib */; };
-		F1BA23CA1BF12DDF0090A427 /* TCCalendarTextSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA23C91BF12DDF0090A427 /* TCCalendarTextSection.swift */; };
 		F1BA23CC1BF12DF10090A427 /* TCCalendarMonthSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA23CB1BF12DF10090A427 /* TCCalendarMonthSection.swift */; };
 		F1BA23CE1BF12E3B0090A427 /* TCCalendarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA23CD1BF12E3B0090A427 /* TCCalendarSection.swift */; };
+		F1BA23D01BF143450090A427 /* TCCalendarSupplementarySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA23CF1BF143450090A427 /* TCCalendarSupplementarySection.swift */; };
+		F1BA23D21BF144580090A427 /* TCCalendarSupplementarySectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA23D11BF144580090A427 /* TCCalendarSupplementarySectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,9 +52,10 @@
 		F19FDE011AD9D0E30002B778 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		F19FDE071AD9D0E30002B778 /* TCCalendarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCCalendarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F19FDE0C1AD9D0E30002B778 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F1BA23C91BF12DDF0090A427 /* TCCalendarTextSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCalendarTextSection.swift; sourceTree = "<group>"; };
 		F1BA23CB1BF12DF10090A427 /* TCCalendarMonthSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCalendarMonthSection.swift; sourceTree = "<group>"; };
 		F1BA23CD1BF12E3B0090A427 /* TCCalendarSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCalendarSection.swift; sourceTree = "<group>"; };
+		F1BA23CF1BF143450090A427 /* TCCalendarSupplementarySection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCalendarSupplementarySection.swift; sourceTree = "<group>"; };
+		F1BA23D11BF144580090A427 /* TCCalendarSupplementarySectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCalendarSupplementarySectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,12 +83,13 @@
 				F190BDA61B865AC400FDAE83 /* TCCalendarLayout.swift */,
 				F190BDA81B865AC400FDAE83 /* TCCalendarView.swift */,
 				F190BDA71B865AC400FDAE83 /* TCCalendarMonthTitleView.swift */,
+				F1BA23D11BF144580090A427 /* TCCalendarSupplementarySectionView.swift */,
 				F190BDAB1B865AC400FDAE83 /* TCCalendarViewWeekdayCell.swift */,
 				F190BDA91B865AC400FDAE83 /* TCCalendarViewDayCell.swift */,
 				F190BDAA1B865AC400FDAE83 /* TCCalendarViewSectionBackgroundView.swift */,
-				F1BA23C91BF12DDF0090A427 /* TCCalendarTextSection.swift */,
-				F1BA23CB1BF12DF10090A427 /* TCCalendarMonthSection.swift */,
 				F1BA23CD1BF12E3B0090A427 /* TCCalendarSection.swift */,
+				F1BA23CB1BF12DF10090A427 /* TCCalendarMonthSection.swift */,
+				F1BA23CF1BF143450090A427 /* TCCalendarSupplementarySection.swift */,
 			);
 			path = TCCalendar;
 			sourceTree = "<group>";
@@ -254,12 +257,13 @@
 				F1BA23CC1BF12DF10090A427 /* TCCalendarMonthSection.swift in Sources */,
 				F190BDB11B865AC400FDAE83 /* TCCalendarViewSectionBackgroundView.swift in Sources */,
 				F190BDAE1B865AC400FDAE83 /* TCCalendarMonthTitleView.swift in Sources */,
-				F1BA23CA1BF12DDF0090A427 /* TCCalendarTextSection.swift in Sources */,
+				F1BA23D01BF143450090A427 /* TCCalendarSupplementarySection.swift in Sources */,
 				F190BDAD1B865AC400FDAE83 /* TCCalendarLayout.swift in Sources */,
 				F190BDAC1B865AC400FDAE83 /* NSDate+month.swift in Sources */,
 				F190BDAF1B865AC400FDAE83 /* TCCalendarView.swift in Sources */,
 				F19FDDFA1AD9D0E30002B778 /* ViewController.swift in Sources */,
 				F19FDDF81AD9D0E30002B778 /* AppDelegate.swift in Sources */,
+				F1BA23D21BF144580090A427 /* TCCalendarSupplementarySectionView.swift in Sources */,
 				F190BDB01B865AC400FDAE83 /* TCCalendarViewDayCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

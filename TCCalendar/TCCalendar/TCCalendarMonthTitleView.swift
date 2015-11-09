@@ -40,6 +40,8 @@ class TCCalendarMonthTitleView: UICollectionReusableView {
     }
     
     func initialize() {
+        self.backgroundColor = UIColor.clearColor()
+
         titleLabel = UILabel(frame: self.bounds)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(titleLabel)

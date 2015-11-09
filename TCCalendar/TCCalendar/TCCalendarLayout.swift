@@ -48,7 +48,11 @@ class TCCalendarLayout: UICollectionViewFlowLayout {
         }
 
         for attribute in sections {
-            let bgAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: TCCalendarViewSectionBackgroundKind, withIndexPath: (attribute as! UICollectionViewLayoutAttributes).indexPath)
+            let indexPath = (attribute as! UICollectionViewLayoutAttributes).indexPath
+
+            guard (self.collectionView as! TCCalendarView).sections[indexPath.section].hasDecorationView else { continue }
+
+            let bgAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: TCCalendarViewSectionBackgroundKind, withIndexPath: indexPath)
 
             let bgWidth = self.backgroundViewReferenceSize.width == 0 ? self.collectionView!.frame.width : self.backgroundViewReferenceSize.width
             let bgHeight = self.backgroundViewReferenceSize.height
