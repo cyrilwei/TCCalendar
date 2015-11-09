@@ -27,12 +27,14 @@ import UIKit
 
 class TCCalendarSupplementarySection: TCCalendarSection {
     var view: UIView
+    var viewHeight: CGFloat
 
     init(view: UIView) {
         self.view = view
+        self.viewHeight = view.bounds.height
     }
 
     var headerHeight: CGFloat {
-        return self.view.bounds.height
+        return viewHeight
     }
 }

@@ -40,6 +40,6 @@ class TCCalendarSupplementarySectionView: UICollectionReusableView {
 
         let views = ["supplementaryView": view]
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(15)-[supplementaryView]-(15)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(15)-[supplementaryView]-(15)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[supplementaryView]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
     }
 }
