@@ -27,6 +27,7 @@ import UIKit
 
 class TCCalendarMonthTitleView: UICollectionReusableView {
     var titleLabel: UILabel!
+
     var drawSeparatorLine: Bool = true {
         didSet {
             self.setNeedsDisplay()
@@ -42,13 +43,18 @@ class TCCalendarMonthTitleView: UICollectionReusableView {
     func initialize() {
         self.backgroundColor = UIColor.clearColor()
 
+        initTitleLabel()
+    }
+
+    private func initTitleLabel() {
         titleLabel = UILabel(frame: self.bounds)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+
         self.addSubview(titleLabel)
 
         let views = ["titleLabel": titleLabel]
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[titleLabel]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[titleLabel]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[titleLabel]-15-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-18-[titleLabel]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
     }
 
     override init(frame: CGRect) {
