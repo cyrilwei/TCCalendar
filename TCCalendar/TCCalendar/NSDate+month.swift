@@ -61,6 +61,12 @@ extension NSDate {
         return formatter.stringFromDate(self)
     }
 
+    var dayString: String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "d"
+        return formatter.stringFromDate(self)
+    }
+
     func compareWithoutTime(anotherDate: NSDate, inCalendar calendar: NSCalendar) -> NSComparisonResult {
         let components = calendar.components([.Year, .Month, .Day], fromDate: self)
         let anotherComponents = calendar.components([.Year, .Month, .Day], fromDate: anotherDate)

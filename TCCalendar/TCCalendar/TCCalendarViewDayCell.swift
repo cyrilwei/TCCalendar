@@ -27,7 +27,11 @@ import UIKit
 
 class TCCalendarViewDayCell: UICollectionViewCell {
     var dayLabel: UILabel!
-    var date: NSDate!
+    var date: NSDate! {
+        didSet {
+            self.dayLabel?.text = self.date?.dayString ?? ""
+        }
+    }
 
     override func prepareForReuse() {
         super.prepareForReuse()

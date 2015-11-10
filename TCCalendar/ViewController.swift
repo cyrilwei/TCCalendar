@@ -57,7 +57,7 @@ class ViewController: UIViewController {
         footerLabel.text = "Calendar Footer"
         calendarView.footerView = footerLabel
 
-        calendarView.cellDecorateClosure = { cell, isEnabled in
+        calendarView.cellDecorateClosure = { cell, calendar, isEnabled in
             if !isEnabled {
                 cell.dayLabel.textColor = UIColor.lightGrayColor()
                 return
@@ -82,7 +82,11 @@ class ViewController: UIViewController {
                     }
                 }
             }
-            
+
+            if cell.date.compareWithoutTime(NSDate(), inCalendar: calendar) == .OrderedSame {
+                cell.dayLabel.font = UIFont.boldSystemFontOfSize(18)
+            }
+
             let view = UIView(frame: cell.bounds)
             view.backgroundColor = color
             cell.backgroundView = view

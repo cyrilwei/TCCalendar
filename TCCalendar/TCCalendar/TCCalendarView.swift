@@ -48,7 +48,7 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
     var shouldSelectDateClosure: ((date: NSDate, calendar: NSCalendar) -> (Bool))?
     var didSelectDateClosure: ((date: NSDate, calendar: NSCalendar) -> ())?
 
-    var cellDecorateClosure: ((cell: TCCalendarViewDayCell, isEnabled: Bool) -> ())?
+    var cellDecorateClosure: ((cell: TCCalendarViewDayCell, calendar: NSCalendar, isEnabled: Bool) -> ())?
 
     var headerView: UIView? {
         didSet {
@@ -133,7 +133,7 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
         self.backgroundColor = UIColor.clearColor()
 
         self.fromDate = NSDate()
-        self.toDate = NSDate().dateByAddingTimeInterval(60*60*24*365)
+        self.toDate = NSDate().dateByAddingTimeInterval(60 * 60 * 24 * 365)
     }
 
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -177,14 +177,9 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
 
                 let realDate = calendar.dateFromComponents(components)!
 
-                cell.dayLabel.text = "\(day)"
                 cell.date = realDate
 
-                if realDate.compareWithoutTime(NSDate(), inCalendar: calendar) == .OrderedSame {
-                    cell.dayLabel.font = UIFont.boldSystemFontOfSize(18)
-                }
-
-                cellDecorateClosure?(cell: cell, isEnabled: shouldEnableDate(realDate))
+                cellDecorateClosure?(cell: cell, calendar: calendar, isEnabled: shouldEnableDate(realDate))
             }
 
             return cell
