@@ -34,12 +34,20 @@ class TCCalendarMonthTitleView: UICollectionReusableView {
         }
     }
 
-    dynamic func titleFont() -> UIFont {
+    dynamic func font() -> UIFont {
         return self.titleLabel?.font ?? UIFont.systemFontOfSize(UIFont.systemFontSize())
     }
 
-    dynamic func setTitleFont(font: UIFont) {
+    dynamic func setFont(font: UIFont) {
         self.titleLabel?.font = font
+    }
+
+    dynamic func textColor() -> UIColor {
+        return self.titleLabel?.textColor ?? UIColor.blackColor()
+    }
+
+    dynamic func setTextColor(color: UIColor) {
+        self.titleLabel?.textColor = color
     }
 
     override func prepareForReuse() {

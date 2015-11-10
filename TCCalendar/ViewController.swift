@@ -35,7 +35,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        TCCalendarMonthTitleView.appearance().setTitleFont(UIFont.boldSystemFontOfSize(20))
+        TCCalendarMonthTitleView.appearance().setFont(UIFont.boldSystemFontOfSize(20))
+        TCCalendarMonthTitleView.appearance().setTextColor(UIColor.blueColor())
+
+        TCCalendarViewWeekdayCell.appearance().setFont(UIFont.boldSystemFontOfSize(12))
+        TCCalendarViewWeekdayCell.appearance().setTextColor(UIColor.orangeColor())
 
         calendarView.fromDate = NSDate()
         calendarView.toDate = NSDate(timeIntervalSinceNow: 60 * 60 * 24 * 180)
