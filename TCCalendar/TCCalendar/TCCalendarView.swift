@@ -251,14 +251,19 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        let width      = self.bounds.width
-        let itemWidth  = floor(width / CGFloat(numberOfDaysInWeek))
+        let width = self.bounds.width
+        let itemWidth = floor(width / CGFloat(numberOfDaysInWeek))
         let itemHeight = itemWidth
         
-//        let miss = width - itemWidth * 7
-//        println(" miss: \(miss)")
+        let miss = width - itemWidth * CGFloat(numberOfDaysInWeek)
+        let halfMiss = floor(miss / 2.0)
+        let missRemains = miss - halfMiss * 2.0
 
-        return CGSizeMake(itemWidth, itemHeight)
+        let itemColumnIndex = indexPath.item % numberOfDaysInWeek
+
+        let widthFix = (itemColumnIndex == 0 || itemColumnIndex == numberOfDaysInWeek - 1) ? halfMiss : ((itemColumnIndex == numberOfDaysInWeek / 2) ? missRemains : 0)
+
+        return CGSizeMake(itemWidth + widthFix, itemHeight)
     }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
