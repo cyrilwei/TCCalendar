@@ -28,7 +28,9 @@ import UIKit
 class TCCalendarLayout: UICollectionViewFlowLayout {
     var backgroundViewReferenceSize: CGSize!
 
-    func initialize() {
+    override func prepareLayout() {
+        super.prepareLayout()
+
         self.minimumInteritemSpacing = 0.0
         self.minimumLineSpacing = 0.0
         self.headerReferenceSize = CGSizeMake(0.0, 44.0)
@@ -66,17 +68,5 @@ class TCCalendarLayout: UICollectionViewFlowLayout {
         }
 
         return attributes
-    }
-
-    override init() {
-        super.init()
-
-        initialize()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-
-        initialize()
     }
 }
