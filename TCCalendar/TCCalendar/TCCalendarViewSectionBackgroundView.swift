@@ -69,3 +69,21 @@ class TCCalendarViewSectionBackgroundView: UICollectionReusableView {
         initialize()
     }
 }
+
+extension TCCalendarViewSectionBackgroundView {
+    dynamic func setFont(font: UIFont) {
+        self.monthLabel?.font = font
+    }
+
+    dynamic func setTextColor(color: UIColor) {
+        self.monthLabel?.textColor = color
+    }
+
+    dynamic func setTextAlpha(alpha: CGFloat) {
+        self.monthLabel?.alpha = alpha
+    }
+
+    dynamic func setTextOffset(offset: UIOffset) {
+        self.contentOffset = offset
+    }
+}
