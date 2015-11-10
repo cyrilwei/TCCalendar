@@ -28,26 +28,11 @@ import UIKit
 class TCCalendarMonthTitleView: UICollectionReusableView {
     var titleLabel: UILabel!
 
+    var separatorLineColor: UIColor = UIColor.blackColor()
     var drawSeparatorLine: Bool = true {
         didSet {
             self.setNeedsDisplay()
         }
-    }
-
-    dynamic func font() -> UIFont {
-        return self.titleLabel?.font ?? UIFont.systemFontOfSize(UIFont.systemFontSize())
-    }
-
-    dynamic func setFont(font: UIFont) {
-        self.titleLabel?.font = font
-    }
-
-    dynamic func textColor() -> UIColor {
-        return self.titleLabel?.textColor ?? UIColor.blackColor()
-    }
-
-    dynamic func setTextColor(color: UIColor) {
-        self.titleLabel?.textColor = color
     }
 
     override func prepareForReuse() {
@@ -91,11 +76,25 @@ class TCCalendarMonthTitleView: UICollectionReusableView {
         let context = UIGraphicsGetCurrentContext()
 
         CGContextSetAllowsAntialiasing(context, false)
-        CGContextSetStrokeColorWithColor(context, UIColor.blackColor().CGColor)
+        CGContextSetStrokeColorWithColor(context, separatorLineColor.CGColor)
         CGContextSetLineWidth(context, 1.0)
         CGContextMoveToPoint(context, 0.0, 0.0)
         CGContextAddLineToPoint(context, self.bounds.width, 0.0)
         CGContextStrokePath(context)
         CGContextSetAllowsAntialiasing(context, true)
+    }
+}
+
+extension TCCalendarMonthTitleView {
+    dynamic func setFont(font: UIFont) {
+        self.titleLabel?.font = font
+    }
+
+    dynamic func setTextColor(color: UIColor) {
+        self.titleLabel?.textColor = color
+    }
+
+    dynamic func setSeparatorColor(color: UIColor) {
+        separatorLineColor = color
     }
 }

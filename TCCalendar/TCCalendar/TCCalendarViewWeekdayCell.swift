@@ -28,22 +28,6 @@ import UIKit
 class TCCalendarViewWeekdayCell: UICollectionViewCell {
     var weekdayLabel: UILabel!
 
-    dynamic func font() -> UIFont {
-        return self.weekdayLabel?.font ?? UIFont.systemFontOfSize(UIFont.systemFontSize())
-    }
-
-    dynamic func setFont(font: UIFont) {
-        self.weekdayLabel?.font = font
-    }
-
-    dynamic func textColor() -> UIColor {
-        return self.weekdayLabel?.textColor ?? UIColor.blackColor()
-    }
-
-    dynamic func setTextColor(color: UIColor) {
-        self.weekdayLabel?.textColor = color
-    }
-
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -82,5 +66,15 @@ class TCCalendarViewWeekdayCell: UICollectionViewCell {
         super.init(coder: aDecoder)
         
         initialize()
+    }
+}
+
+extension TCCalendarViewWeekdayCell {
+    dynamic func setFont(font: UIFont) {
+        self.weekdayLabel?.font = font
+    }
+
+    dynamic func setTextColor(color: UIColor) {
+        self.weekdayLabel?.textColor = color
     }
 }

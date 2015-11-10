@@ -37,6 +37,7 @@ class ViewController: UIViewController {
 
         TCCalendarMonthTitleView.appearance().setFont(UIFont.boldSystemFontOfSize(20))
         TCCalendarMonthTitleView.appearance().setTextColor(UIColor.blueColor())
+        TCCalendarMonthTitleView.appearance().setSeparatorColor(UIColor.redColor())
 
         TCCalendarViewWeekdayCell.appearance().setFont(UIFont.boldSystemFontOfSize(12))
         TCCalendarViewWeekdayCell.appearance().setTextColor(UIColor.orangeColor())
