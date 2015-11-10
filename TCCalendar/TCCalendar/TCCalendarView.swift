@@ -62,27 +62,27 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
         }
     }
 
-    var startDate: NSDate! {
+    var fromDate: NSDate! {
         didSet {
             updateData()
         }
     }
 
-    var endDate: NSDate! {
+    var toDate: NSDate! {
         didSet {
             updateData()
         }
     }
 
     private func updateData() {
-        if startDate != nil && endDate != nil {
+        if fromDate != nil && toDate != nil {
             sections.removeAll(keepCapacity: true)
 
             if let headerView = headerView {
                 sections.append(TCCalendarSupplementarySection(view: headerView))
             }
 
-            var dateForMonth = startDate.firstDateOfMonth(inCalendar: calendar)
+            var dateForMonth = fromDate.firstDateOfMonth(inCalendar: calendar)
 
             let monthComponents = NSDateComponents()
             monthComponents.month = 1
@@ -96,7 +96,7 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
                 dateForMonth = calendar.dateByAddingComponents(monthComponents, toDate: dateForMonth, options: NSCalendarOptions())!
 
                 section = TCCalendarMonthSection(month: dateForMonth, calendar: calendar, numberOfDaysInWeek: numberOfDaysInWeek)
-            } while(dateForMonth.compare(endDate) != NSComparisonResult.OrderedDescending)
+            } while(dateForMonth.compare(toDate) != NSComparisonResult.OrderedDescending)
 
             if let footerView = footerView {
                 sections.append(TCCalendarSupplementarySection(view: footerView))
@@ -132,8 +132,8 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
         self.collectionViewLayout = TCCalendarLayout()
         self.backgroundColor = UIColor.clearColor()
 
-        self.startDate = NSDate()
-        self.endDate = NSDate().dateByAddingTimeInterval(60*60*24*365)
+        self.fromDate = NSDate()
+        self.toDate = NSDate().dateByAddingTimeInterval(60*60*24*365)
     }
 
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -192,8 +192,8 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
     }
 
     private func shouldEnableDate(date: NSDate) -> Bool {
-        guard date.compareWithoutTime(self.startDate, inCalendar: calendar) != .OrderedAscending else { return false }
-        guard date.compareWithoutTime(self.endDate, inCalendar: calendar) != .OrderedDescending else { return false }
+        guard date.compareWithoutTime(self.fromDate, inCalendar: calendar) != .OrderedAscending else { return false }
+        guard date.compareWithoutTime(self.toDate, inCalendar: calendar) != .OrderedDescending else { return false }
 
         return self.shouldEnableDateClosure?(date: date, calendar: calendar) ?? true
     }

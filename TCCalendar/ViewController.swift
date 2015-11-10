@@ -37,7 +37,8 @@ class ViewController: UIViewController {
 
         TCCalendarMonthTitleView.appearance().setTitleFont(UIFont.boldSystemFontOfSize(20))
 
-        calendarView.endDate = NSDate(timeIntervalSinceNow: 60 * 60 * 24 * 180)
+        calendarView.fromDate = NSDate()
+        calendarView.toDate = NSDate(timeIntervalSinceNow: 60 * 60 * 24 * 180)
 
         let headerLabel = UILabel(frame: CGRectMake(0.0, 0.0, 0.0, 100.0))
         headerLabel.font = UIFont.italicSystemFontOfSize(UIFont.systemFontSize())
