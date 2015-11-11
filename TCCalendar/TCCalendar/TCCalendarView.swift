@@ -236,8 +236,8 @@ class TCCalendarView: UICollectionView, UICollectionViewDelegate, UICollectionVi
         } else {
             let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: TCCalendarSupplementarySectionViewIdentifier, forIndexPath: indexPath) as! TCCalendarSupplementarySectionView
 
-            if let sectionView = (sections[indexPath.section] as? TCCalendarSupplementarySection)?.view {
-                view.showSupplementaryView(sectionView)
+            if let section = sections[indexPath.section] as? TCCalendarSupplementarySection {
+                view.showSupplementaryView(section.view, offset: section.offset)
             }
 
             return view

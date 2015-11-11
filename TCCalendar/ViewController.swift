@@ -122,3 +122,9 @@ class ViewController: UIViewController {
         }
     }
 }
+
+extension TCCalendarSupplementarySection {
+    var offset: UIOffset {
+        return UIOffsetMake(15.0, 15.0)
+    }
+}

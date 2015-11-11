@@ -29,6 +29,7 @@ protocol TCCalendarSection {
     var numberOfItems: Int { get }
     var hasDecorationView: Bool { get }
     var headerHeight: CGFloat { get }
+    var offset: UIOffset { get }
 }
 
 extension TCCalendarSection {
@@ -42,5 +43,9 @@ extension TCCalendarSection {
 
     var headerHeight: CGFloat {
         return 44.0
+    }
+
+    var offset: UIOffset {
+        return UIOffsetZero
     }
 }
