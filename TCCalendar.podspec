@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "8.0"
 
   s.source       = { :git => "https://github.com/cyrilwei/TCCalendar.git", :tag => 'v0.1' }
-  s.source_files = "TCCalendar/TCCalendar/*.swift"
+  s.source_files = "Sources/*.swift"
 
   s.framework    = "UIKit"
   s.requires_arc = true
